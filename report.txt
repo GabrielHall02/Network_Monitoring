@@ -30,7 +30,10 @@ please wait ...
 enp3s0     0     0     0     0
 
 Tendo como base o primeiro método.
-Aqui 
+Aqui criamos uma associative array com as a key = TX.
+De seguida fazemos uma array com as keys e damos sort em reverse a essa array.
+Por ultimo a partir da nova array com as sorted keys vamos dar print pela ordem estabelecida nessa array.
+
 
 #---------------------------------------------------------#
 ./netifstat.sh -r 10
@@ -39,6 +42,12 @@ please wait ...
   wlo1     6     7   0,6   0,7
     lo     0     0     0     0
 enp3s0     0     0     0     0
+
+Tendo como base o primeiro método.
+Aqui criamos uma associative array com as a key = RX.
+De seguida fazemos uma array com as keys e damos sort em reverse a essa array.
+Por ultimo a partir da nova array com as sorted keys vamos dar print pela ordem estabelecida nessa array.
+
 #---------------------------------------------------------#
 ./netifstat.sh -T 10
 please wait ...
@@ -46,6 +55,12 @@ please wait ...
   wlo1    33    31   3,3   3,1
     lo     0     0     0     0
 enp3s0     0     0     0     0
+
+Tendo como base o primeiro método.
+Aqui criamos uma associative array com as a key = trate.
+De seguida fazemos uma array com as keys e damos sort em reverse a essa array.
+Por ultimo a partir da nova array com as sorted keys vamos dar print pela ordem estabelecida nessa array.
+
 #---------------------------------------------------------#
 ./netifstat.sh -R 10
 please wait ...
@@ -53,6 +68,12 @@ please wait ...
   wlo1    33    31   3,3   3,1
     lo     0     0     0     0
 enp3s0     0     0     0     0
+
+Tendo como base o primeiro método.
+Aqui criamos uma associative array com as a key = rrate.
+De seguida fazemos uma array com as keys e damos sort em reverse a essa array.
+Por ultimo a partir da nova array com as sorted keys vamos dar print pela ordem estabelecida nessa array.
+
 #---------------------------------------------------------#
 ./netifstat.sh -v 10
 please wait ...
@@ -60,11 +81,21 @@ please wait ...
   wlo1    32    31   3,2   3,1
     lo     0     0     0     0
 enp3s0     0     0     0     0
+
+Tendo como base o primeiro método.
+Aqui criamos uma associative array com as a key = interface.
+De seguida fazemos uma array com as keys e damos sort em reverse a essa array.
+Por ultimo a partir da nova array com as sorted keys vamos dar print pela ordem estabelecida nessa array.
+
 #---------------------------------------------------------#
 ./netifstat.sh -c "l.*" 10
 please wait ...
 NETIF    TX    RX TRATE RRATE
    lo     0     0     0     0
+
+Tendo como base o primeiro método.
+
+
 #---------------------------------------------------------# 
 ./netifstat.sh -l 10
 please wait ...
