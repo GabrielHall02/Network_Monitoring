@@ -56,9 +56,9 @@ function parser () {
         rrate=$(echo |awk -va=$rx -vb=$t '{ print a/b}')
 
         if [ $i -eq "0" ];then
-        printf "%5s %5s %5s %5s %5s\n" NETIF TX RX TRATE RRATE
+        printf "%7s %5s %5s %5s %5s\n" NETIF TX RX TRATE RRATE
         fi
-        printf "%5s %5s %5s %5s %5s\n" $netif $tx $rx $trate $rrate
+        printf "%7s %5s %5s %5s %5s\n" $netif $tx $rx $trate $rrate
 
         done   
     fi
@@ -101,9 +101,9 @@ if [ $1 == "-p" ]; then
     rrate=$(echo |awk -va=$rx -vb=$t '{ print a/b}')
 
     if [ $i -eq "0" ];then
-    printf "%6s %5s %5s %5s %5s\n" NETIF TX RX TRATE RRATE
+    printf "%7s %5s %5s %5s %5s\n" NETIF TX RX TRATE RRATE
     fi
-    printf "%6s %5s %5s %5s %5s\n" $netif $tx $rx $trate $rrate
+    printf "%7s %5s %5s %5s %5s\n" $netif $tx $rx $trate $rrate
     done
     else
     echo "Invalid number of interfaces"
@@ -177,7 +177,7 @@ if [[ "$1" = "-t" ]] || [[ "$1" = "-r" ]] || [[ "$1" = "-T" ]] || [[ "$1" = "-R"
 
     
     if [ $i -eq "0" ];then
-    printf "%6s %5s %5s %5s %5s\n" NETIF TX RX TRATE RRATE 
+    printf "%7s %5s %5s %5s %5s\n" NETIF TX RX TRATE RRATE 
     fi
     done
     
@@ -192,7 +192,7 @@ if [[ "$1" = "-t" ]] || [[ "$1" = "-r" ]] || [[ "$1" = "-T" ]] || [[ "$1" = "-R"
     for key in "${sorted[@]}"; do
         IFS=' ' #new delimiter = ' '
         read -a line_arr <<< ${tst[$key]} #Creating array in sorted order
-        printf "%6s %5s %5s %5s %5s\n" ${line_arr[0]} ${line_arr[1]} ${line_arr[2]} ${line_arr[3]} ${line_arr[4]}
+        printf "%7s %5s %5s %5s %5s\n" ${line_arr[0]} ${line_arr[1]} ${line_arr[2]} ${line_arr[3]} ${line_arr[4]}
 
     done
     
@@ -254,7 +254,7 @@ if [[ "$1" = "-l" ]]; then
             #Creating array to store old values
             declare -A store_array
             if [[ $c -eq "0" ]];then
-                printf "%6s %5s %5s %5s %5s %5s %5s\n" NETIF TX RX TRATE RRATE TXTOT RXTOT
+                printf "%7s %5s %5s %5s %5s %5s %5s\n" NETIF TX RX TRATE RRATE TXTOT RXTOT
                 for key in ${!old_array[@]}
                 do
                 IFS=', '
@@ -263,7 +263,7 @@ if [[ "$1" = "-l" ]]; then
                 txtot=$((${info[4]} + ${info[0]}))
                 rxtot=$((${info[5]} + ${info[1]}))
                 #Print new values 
-                printf "%6s %5s %5s %5s %5s %5s %5s\n" $key ${info[0]} ${info[1]} ${info[2]} ${info[3]} $txtot $rxtot
+                printf "%7s %5s %5s %5s %5s %5s %5s\n" $key ${info[0]} ${info[1]} ${info[2]} ${info[3]} $txtot $rxtot
                 #Store new values
                 store_array[$key]="${info[0]},${info[1]},${info[2]},${info[3]},$txtot,$rxtot"
                 
@@ -272,7 +272,7 @@ if [[ "$1" = "-l" ]]; then
                 unset IFS
             else
                 #echo debug
-                printf "%6s %5s %5s %5s %5s %5s %5s\n" NETIF TX RX TRATE RRATE TXTOT RXTOT
+                printf "%7s %5s %5s %5s %5s %5s %5s\n" NETIF TX RX TRATE RRATE TXTOT RXTOT
                 #Accessing stored values to add new values
                 for key in ${!store_array[@]}
                 do
@@ -282,7 +282,7 @@ if [[ "$1" = "-l" ]]; then
                 txtot=$((${info[4]} + ${info[0]}))
                 rxtot=$((${info[5]} + ${info[1]}))
                 #Print new values
-                printf "%6s %5s %5s %5s %5s %5s %5s\n" $key ${info[0]} ${info[1]} ${info[2]} ${info[3]} $txtot $rxtot
+                printf "%7s %5s %5s %5s %5s %5s %5s\n" $key ${info[0]} ${info[1]} ${info[2]} ${info[3]} $txtot $rxtot
                 #Store new values
                 store_array[$key]="${info[0]},${info[1]},${info[2]},${info[3]},$txtot,$rxtot"
                 done
@@ -346,29 +346,29 @@ for ((i=0;i<=${#array[@]}-1;i+=3));do
         case $1 in
         -b)
             if [ $i -eq "0" ];then
-        	printf "%6s %6s %6s %7s %7s\n" NETIF TX/b RX/b TRATE/b RRATE/b
+        	printf "%7s %6s %6s %7s %7s\n" NETIF TX/b RX/b TRATE/b RRATE/b
             fi
-            printf "%6s %6s %6s %7s %7s\n" $netif $tx $rx $trate $rrate
+            printf "%7s %6s %6s %7s %7s\n" $netif $tx $rx $trate $rrate
             ;;
         -k)
             if [ $i -eq "0" ];then
-        	printf "%6s %6s %6s %7s %7s\n" NETIF TX/kb RX/kb TRATE/kb RRATE/kb
+        	printf "%7s %6s %6s %7s %7s\n" NETIF TX/kb RX/kb TRATE/kb RRATE/kb
             fi
             tx=$(echo |awk -va=$tx '{ print a*0.001}') 
             rx=$(echo |awk -va=$rx '{ print a*0.001}') 
             trate=$(echo |awk -va=$trate '{ print a*0.001}')
             rrate=$(echo |awk -va=$rrate '{ print a*0.001}')
-            printf "%6s %6s %6s %7s %8s\n" $netif $tx $rx $trate $rrate
+            printf "%7s %6s %6s %7s %8s\n" $netif $tx $rx $trate $rrate
             ;;
         -m)
             if [ $i -eq "0" ];then
-        	printf "%6s %8s %8s %9s %9s\n" NETIF TX/mb RX/mb TRATE/mb RRATE/mb
+        	printf "%7s %8s %8s %9s %9s\n" NETIF TX/mb RX/mb TRATE/mb RRATE/mb
             fi
             tx=$(echo |awk -va=$tx '{ print a*0.00001}') 
             rx=$(echo |awk -va=$rx '{ print a*0.00001}') 
             trate=$(echo |awk -va=$trate '{ print a*0.00001}')
             rrate=$(echo |awk -va=$rrate '{ print a*0.00001}')
-            printf "%6s %8s %8s %9s %9s\n" $netif $tx $rx $trate $rrate
+            printf "%7s %8s %8s %9s %9s\n" $netif $tx $rx $trate $rrate
             ;;
     	esac
       
