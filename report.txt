@@ -94,6 +94,7 @@ NETIF    TX    RX TRATE RRATE
    lo     0     0     0     0
 
 Tendo como base o primeiro método.
+Utilizando o operador regex "=~" verificamos se existe alguma interface que se relacione com a expressão regex proposta pelo utilizador.
 
 
 #---------------------------------------------------------# 
@@ -114,6 +115,10 @@ enp3s0     0     0     0     0     0     0
 enp3s0     0     0     0     0     0     0
   wlo1    44    45     4     4   136   140
     lo     0     0     0     0     0     0
+
+Aqui criamos uma associative array que armazene os valores antigos de forma que seja possivel somar os novos valores.
+
+
 #---------------------------------------------------------#
 ./netifstat.sh -b 10
 please wait ...
