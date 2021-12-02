@@ -135,7 +135,7 @@ if [[ "$1" = "-t" ]] || [[ "$1" = "-r" ]] || [[ "$1" = "-T" ]] || [[ "$1" = "-R"
     rrate=$(echo |awk -va=$rx -vb=$t '{ print a/b}')
     
 
-    c=$((i / 100)) # counter
+    c=$(echo | awk -va=$i -vc=100 '{ print a/c}') # counter
     # Creating map with tx||rx||trate||rrate || iface as keys
     case $1 in
         -t)
