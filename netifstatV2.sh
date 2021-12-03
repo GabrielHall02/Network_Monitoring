@@ -10,6 +10,7 @@
 	        
 	        # read -d ---> delimiter " "
 	        # read -a ---> create array  
+			# read -r ---> Backslash does not act as an escape character
 	        # netstat -i ---> displays statistics for the network
 	        # egrep -v ---> filter and invert selection (egrep = grep -E)
 	        # sort -u k1,1 ---> remove duplicates from column 1
@@ -212,9 +213,11 @@
 	#Metodo -c "string" "time"
 	if [[ "$1" = "-c" ]];then
 	    if [ "$2" != "" ];then
+			#Creating array with interfaces
 	        read -d -r -a interfaces <<<  $(netstat -i | egrep -v "Iface|Kernel" | awk '{print $1}')
 	        for element in ${interfaces[@]}
 	        do  
+				#Evaluating regex expression
 	            if [[ $element =~ ^$2 ]]; then
 	                parser $3 $element
 	            fi
@@ -241,16 +244,16 @@
 	                ti=${array[i+1]}
 	                ri=${array[i+2]}
 	                sleep $t
-	                read -d -r -a arrayy <<<  $(netstat -i | egrep -v "Iface|Kernel" |sort -u -k1,1 | awk '{print $1,$3,$7}')
-	                tf=${arrayy[i+1]}  
-	                rf=${arrayy[i+2]}
+	                read -d -r -a final_array <<<  $(netstat -i | egrep -v "Iface|Kernel" |sort -u -k1,1 | awk '{print $1,$3,$7}')
+	                tf=${final_array[i+1]}  
+	                rf=${final_array[i+2]}
 	
 	                tx=$((tf - ti))
 	                rx=$((rf - ri))
 	                trate=$(echo |awk -va=$tx -vb=$t '{ print a/b}') 
 	                rrate=$(echo |awk -va=$rx -vb=$t '{ print a/b}')
 	                
-	                #Creating associative array to get new values
+	                #Creating associative array to get new values with interface as keys
 	                declare -A old_array
 	                old_array[$netif]="$tx, $rx, $trate, $rrate, $txtot, $rxtot"
 	
@@ -284,6 +287,7 @@
 	                for key in ${!store_array[@]}
 	                do
 	                IFS=', '
+					# Spliting string stored in key from store_array and create new array with info
 	                read -r -a  info <<< ${store_array[$key]}
 	                #echo "${info[@]}"
 	                txtot=$((${info[4]} + ${info[0]}))
@@ -351,7 +355,7 @@
 	        if [ $i -eq "0" ];then
 	    	printf "%7s %6s %6s %7s %7s\n" NETIF TX/kb RX/kb TRATE/kb RRATE/kb
 	        fi
-			# Using awk to  
+			# Using awk to calculate decimal values
 	        tx=$(echo |awk -va=$tx '{ print a*0.001}') 
 	        rx=$(echo |awk -va=$rx '{ print a*0.001}') 
 	        trate=$(echo |awk -va=$trate '{ print a*0.001}')
