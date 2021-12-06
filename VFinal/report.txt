@@ -1,8 +1,6 @@
 Leonardo dos Santos Flórido & Gabriel Hall Abreu
 Nmecº: 103360 & Nmecº:102851
 
-ola
-
 No projeto utilizamos bytes como unidade default
 
 #---------------------------------------------------------#
